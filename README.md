@@ -3,7 +3,7 @@
 
 # Зміст
 
-- [Опис об’єкта автоматизації]([https://github.com/danya-andrienko/Qualification-work-NUFT-/blob/main/README.md#опис-об'єкта-автоматизації](https://github.com/danya-andrienko/Qualification-work-NUFT-/blob/main/README.md#%D0%BE%D0%BF%D0%B8%D1%81-%D0%BE%D0%B1%D1%94%D0%BA%D1%82%D0%B0-%D0%B0%D0%B2%D1%82%D0%BE%D0%BC%D0%B0%D1%82%D0%B8%D0%B7%D0%B0%D1%86%D1%96%D1%97))
+- [Опис об’єкта автоматизації](https://github.com/danya-andrienko/Qualification-work-NUFT-/blob/main/README.md#%D0%BE%D0%BF%D0%B8%D1%81-%D0%BE%D0%B1%D1%94%D0%BA%D1%82%D0%B0-%D0%B0%D0%B2%D1%82%D0%BE%D0%BC%D0%B0%D1%82%D0%B8%D0%B7%D0%B0%D1%86%D1%96%D1%97)
     - Технологічний опис об’єкта автоматизації
     - Розробка завдання на систему автоматизації
 - [Система автоматизації]()
