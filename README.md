@@ -86,60 +86,60 @@
 
 На рисунку 2.2 показана схема роботи датчика.
 
-![Image alt](Aspose.Words.4bcc82a3-5720-4fb9-9640-612142625596.003.png)
+![Image alt](https://github.com/danya-andrienko/Qualification-work-NUFT-/blob/main/image/Aspose.Words.4bcc82a3-5720-4fb9-9640-612142625596.003.png)
 
 Рис 2.2 – Схема роботи датчика Prosonic S FDU91 де: BD – зона нечутливості, E – нульовий рівень, F – діапазон вимірювань, D – відстань від мембрани датчика до продукту, L – рівень
 
 На рисунку 2.3 зображені габаритні розміри рівнеміра, даний датчик має вихідний сигнал 4-20мА[1] з використанням  HART Profibus DP FMU90, що зображено на рисунку 2.4 і який має два входи для датчиків рівня та два виходи 4-20мА, встановлюється на DIN-рейку та може розташовуватися на відстані до 300м від датчика[2].
 
-![Image alt](Aspose.Words.4bcc82a3-5720-4fb9-9640-612142625596.004.png)
+![Image alt](https://github.com/danya-andrienko/Qualification-work-NUFT-/blob/main/image/Aspose.Words.4bcc82a3-5720-4fb9-9640-612142625596.004.png)
 
 Рис 2.3 – Габаритні розміри рівнеміра
 
 
-![Image alt](Aspose.Words.4bcc82a3-5720-4fb9-9640-612142625596.005.jpeg)
+![Image alt](https://github.com/danya-andrienko/Qualification-work-NUFT-/blob/main/image/Aspose.Words.4bcc82a3-5720-4fb9-9640-612142625596.005.jpeg)
 
 Рис 2.4 – HART Profibus DP FMU90
 
 Для контролю наявності пляшки було використано датчик для виявлення прозорих пластикових або скляних пляшок PRK18B.T2/4P-M12(Рис 2.5).
 
-![Image alt](Aspose.Words.4bcc82a3-5720-4fb9-9640-612142625596.006.png)
+![Image alt](https://github.com/danya-andrienko/Qualification-work-NUFT-/blob/main/image/Aspose.Words.4bcc82a3-5720-4fb9-9640-612142625596.006.png)
 
 Рис 2.5 – Зовнішній вигляд PRK18B.T2/4P-M12
 
 Датчик має можливість налаштування за допомогою 11-оборотного потенціометра та має PNP виходи як NO так і NC. На рисунку 2.6 показаний приклад встановлення датчику.
 
-![Image alt](Aspose.Words.4bcc82a3-5720-4fb9-9640-612142625596.007.png)
+![Image alt](https://github.com/danya-andrienko/Qualification-work-NUFT-/blob/main/image/Aspose.Words.4bcc82a3-5720-4fb9-9640-612142625596.007.png)
 
 Рис 2.6 – Приклад встановлення датчика PRK18B.T2/4P-M12
 
 Для моніторингу витрати рідини бело використано ультразвуковий витратомір Sitrans F US SOPLO(Рис2.7).
 
-![Image alt](Aspose.Words.4bcc82a3-5720-4fb9-9640-612142625596.008.png)
+![Image alt](https://github.com/danya-andrienko/Qualification-work-NUFT-/blob/main/image/Aspose.Words.4bcc82a3-5720-4fb9-9640-612142625596.008.png)
 
 Рис 2.7 – Витратомір Sitrans F US SOPLO
 
 Витратомір має аналоговий струмовий вихід 4-20мА або 0-20мА. Даний витратомір не можна встановлювати у найвищій точці труби або у вертикальних трубах із вільним виходом(Рис2.8).
 
-![Image alt](Aspose.Words.4bcc82a3-5720-4fb9-9640-612142625596.009.png)
+![Image alt](https://github.com/danya-andrienko/Qualification-work-NUFT-/blob/main/image/Aspose.Words.4bcc82a3-5720-4fb9-9640-612142625596.009.png)
 
 Рис 2.8 – Приклад не правильного встановлення
 
 Щоб правильно встановити даний витратомір забезпечити прямі ділянки довжиною мінімум 3 діаметри трубопроводу як до витратоміра так і після нього(Рис2.9).
 
-![Image alt](Aspose.Words.4bcc82a3-5720-4fb9-9640-612142625596.010.png)
+![Image alt](https://github.com/danya-andrienko/Qualification-work-NUFT-/blob/main/image/Aspose.Words.4bcc82a3-5720-4fb9-9640-612142625596.010.png)
 
 Рис 2.9 – Приклад правильного встановлення витратоміра
 
 Для регулювання подачі рідини до машини розливу використовується пневмоклапан Fisher easy-e ED Control Valve(Рис 2.10).
 
-![Image alt](Aspose.Words.4bcc82a3-5720-4fb9-9640-612142625596.011.png)
+![Image alt](https://github.com/danya-andrienko/Qualification-work-NUFT-/blob/main/image/Aspose.Words.4bcc82a3-5720-4fb9-9640-612142625596.011.png)
 
 Рис 2.10 – Fisher easy-e ED Control Valve
 
 Клапан йде у комплекті з електропневматичним позиціонером, що має живлення 24В постійного струму та вихідний сигнал 4-20мА(Рис 2.11).
 
-![Image alt](Aspose.Words.4bcc82a3-5720-4fb9-9640-612142625596.012.png)
+![Image alt](https://github.com/danya-andrienko/Qualification-work-NUFT-/blob/main/image/Aspose.Words.4bcc82a3-5720-4fb9-9640-612142625596.012.png)
 
 Рис 2.11 – Електропневматичний позиціонер
 
@@ -147,7 +147,7 @@
 
 Для контролю рівня в пляшках а також для контролю клапанів наповнення використано безконтактні ємнісні датчики CR18-8DN(Рис 2.12).
 
-![Image alt](Aspose.Words.4bcc82a3-5720-4fb9-9640-612142625596.013.png)
+![Image alt](https://github.com/danya-andrienko/Qualification-work-NUFT-/blob/main/image/Aspose.Words.4bcc82a3-5720-4fb9-9640-612142625596.013.png)
 
 Рис 2.12 – Датчик CR18-8DN
 
@@ -155,13 +155,13 @@
 
 На рисунку 2.13 показано приклади встановлення датчика з таблицею всіх відстаней.
 
-![Image alt](Aspose.Words.4bcc82a3-5720-4fb9-9640-612142625596.014.png)
+![Image alt](https://github.com/danya-andrienko/Qualification-work-NUFT-/blob/main/image/Aspose.Words.4bcc82a3-5720-4fb9-9640-612142625596.014.png)
 
 Рис 2.13 – Приклад встановлення датчика
 
 У для наповнення пляшок рідиною використовуються електромагнітні клапани GAMA 2W-20 N.C. 3/4"(Рис 2.14).
 
-![Image alt](Aspose.Words.4bcc82a3-5720-4fb9-9640-612142625596.015.png)
+![Image alt](https://github.com/danya-andrienko/Qualification-work-NUFT-/blob/main/image/Aspose.Words.4bcc82a3-5720-4fb9-9640-612142625596.015.png)
 
 Рис 2.14 – GAMA 2W-20 N.C. 3/4"
 
@@ -169,13 +169,13 @@
 
 Для контролю позиціонування пляшок та для реалізації механізму наповнення пляшок використані пневмоциліндри односторонньої дії ISO 6432 IAS 20x60-S(Рис 2.15)
 
-![Image alt](Aspose.Words.4bcc82a3-5720-4fb9-9640-612142625596.016.png)
+![Image alt](https://github.com/danya-andrienko/Qualification-work-NUFT-/blob/main/image/Aspose.Words.4bcc82a3-5720-4fb9-9640-612142625596.016.png)
 
 Рис 2.15 – ISO 6432 IAS 20x60-S
 
 Для перетворення електричного сигналу в пневматичний для керування пневмоциліндрами використовується пневмо-розподілювач 4V210-08B 24В (Рис 2.16).
 
-![Image alt](Aspose.Words.4bcc82a3-5720-4fb9-9640-612142625596.017.png)
+![Image alt](https://github.com/danya-andrienko/Qualification-work-NUFT-/blob/main/image/Aspose.Words.4bcc82a3-5720-4fb9-9640-612142625596.017.png)
 
 Рис.2.16 – 4V210-08B 24В
 
@@ -188,7 +188,7 @@
 
 Для визначення швидкості обертання двигуна конвеєра викоритано інкрементальний оптичний енкодер ARC B 50 (Рис. 2.17).
 
-![Image alt](Aspose.Words.4bcc82a3-5720-4fb9-9640-612142625596.018.png)
+![Image alt](https://github.com/danya-andrienko/Qualification-work-NUFT-/blob/main/image/Aspose.Words.4bcc82a3-5720-4fb9-9640-612142625596.018.png)
 
 Рис. 2.17 –Вигляд енкодера ARC B 50
 
@@ -203,7 +203,7 @@
 
 Для частотного регулювання швидкістю обертання двигуна конвеєра використано частотний перетворювач LENZE ESMD371X2SF A(Рис.2.18).
 
-![Image alt](Aspose.Words.4bcc82a3-5720-4fb9-9640-612142625596.019.png)
+![Image alt](https://github.com/danya-andrienko/Qualification-work-NUFT-/blob/main/image/Aspose.Words.4bcc82a3-5720-4fb9-9640-612142625596.019.png)
 
 Рис.2.18 – Частотний перетворювач LENZE ESMD371X2SF A
 
@@ -216,7 +216,7 @@
 
 Для контролю опускання трубок наповнення до пляшок використано безконтактний індуктивний датчик кінцевого положення LJ12A3-4-Z/BX NP(Ри2.20).
 
-![Image alt](Aspose.Words.4bcc82a3-5720-4fb9-9640-612142625596.020.png)
+![Image alt](https://github.com/danya-andrienko/Qualification-work-NUFT-/blob/main/image/Aspose.Words.4bcc82a3-5720-4fb9-9640-612142625596.020.png)
 
 Рис.2.20 – Датчик LJ12A3-4-Z/BX
 
