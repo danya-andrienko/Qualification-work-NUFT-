@@ -447,149 +447,88 @@
 
 Підпрограма Process написана на мові ST і вона є основною програмою де іде виконання процесу. Лістинг основної програми:
 
-(\*умова початку роботи програми\*)
+(*умова початку роботи програми*)
 
-`	`PI\_IN ( PV := INT\_TO\_REAL (IN := konv\_in.SE\_3a), SP := Speed\_kn, MAN\_AUTO := man\_auto,
+	PI_IN ( PV := INT_TO_REAL (IN := konv_in.SE_3a), SP := Speed_kn, MAN_AUTO := man_auto,
 
-`        `PARA := Para\_kn, OUT := konv\_in.Motor);(\*параметри регулятора\*)
+        PARA := Para_kn, OUT := konv_in.Motor);(*параметри регулятора*)
 
-`	`sum\_botle(cu := in\_out.GE\_4a);	(\*Прив'язка датчика наявності пляшки до лічильна\*)
+	sum_botle(cu := in_out.GE_4a);	(*Прив'язка датчика наявності пляшки до лічильна*)
 
 if not pusk then
 
-`	`PI\_IN(TR\_S:=true);
-
-end\_if;	
-
-if alarm\_kl then(\*Дії основної програми у випадку будь-якої аварії\*)
-
-`		`rozliv.kl1 := false;
-
-`		`rozliv.kl2 := false;
-
-`		`rozliv.kl3 := false;
-
-`		`bunk\_wt.kl\_2g := 0.0;
-
-`		`PI\_IN(TR\_I:=0.0);
-
-`		`PI\_IN(TR\_S:=true);
-
-END\_IF;
-
-`	`if not alarm\_kl then
-
-`	`case Step\_prog of (\*Початок основної програми\*)
-
-`	`0:
-
-`	`if PUSK and not STOP then
-
-`		`PI\_IN(TR\_S:=false);(\*Вимкнення трекінгу\*)
-
-`	`if sum\_botle.cv = 1 then(\*Якщо пройшла пляшка відкрити цилінтр на конвеєрі\*)
-
-`		`rozliv.pn\_4B := true;
-
-`	`end\_if;
-
-`	`If sum\_botle.cv >= 3 then(\*Якщо три пляшки пройшло\*)
-
-`		`PI\_IN(TR\_S:=true);
-
-`		`PI\_IN(TR\_I:=0.0);
-
-`		`sum\_botle(r := true);		
-
-`		`Step\_prog := 1;
-
-
-
-`	`end\_if;
-
-`	`end\_if;
-
-`	`1:
-
-`		`sum\_botle(r := false);
-
-`	`if rozliv.pn\_4B then
-
-`		`rozliv.pn\_5B := true;
-
-`	`if fb\_pc.pn\_water then
-
-`		`Step\_prog := 2;	
-
-`	`end\_if;
-
-`	`end\_if;
-
-`	`2:
-
-`		`rozliv.kl1 := true;
-
-`		`rozliv.kl2 := true;
-
-`		`rozliv.kl3 := true;
-
-`	`if fb\_kl.kl1 and fb\_kl.kl2 and fb\_kl.kl3 and rozliv.kl1 and rozliv.kl2 and rozliv.kl3 then
-
-`		`Step\_prog := 3;
-
-`	`end\_if;
-
-`	`3:
-
-`	`if rozliv.le\_6a then
-
-`		`rozliv.kl1 := false;
-
-`	`end\_if;
-
-`	`if rozliv.le\_7a then
-
-`		`rozliv.kl2 := false;
-
-`	`end\_if;
-
-`	`if rozliv.le\_8a then
-
-`		`rozliv.kl3 := false;
-
-`	`end\_if;
-
-`	`if rozliv.le\_6a and rozliv.le\_7a and rozliv.le\_8a then
-
-`		`Step\_prog := 4;
-
-`	`end\_if;
-
-`	`4:
-
-`	`rozliv.pn\_5B := false;
-
-`	`if not fb\_pc.pn\_water then
-
-`		`rozliv.pn\_4B := false;
-
-`		`Step\_prog := 5;
-
-`	`end\_if;
-
-`	`5: 
-
-`	`if not fb\_pc.pn\_konv then
-
-`		`PI\_IN(TR\_S:=false);
-
-`		`Step\_prog := 0;
-
-`	`end\_if;
-
-`	`end\_case;
-
-`	`end\_if;
+	PI_IN(TR_S:=true);
+    
+end_if;	
+
+if alarm_kl then (*Дії основної програми у випадку будь-якої аварії*)
+
+		rozliv.kl1 := false;
+		rozliv.kl2 := false;
+		rozliv.kl3 := false;
+		bunk_wt.kl_2g := 0.0;
+		PI_IN(TR_I:=0.0);
+		PI_IN(TR_S:=true);
+
+END_IF;
+
+	if not alarm_kl then
+    
+	case Step_prog of (*Початок основної програми*)
+	0:
+	if PUSK and not STOP then
+		PI_IN(TR_S:=false);(*Вимкнення трекінгу*)
+	if sum_botle.cv = 1 then(*Якщо пройшла пляшка відкрити цилінтр на конвеєрі*)
+		rozliv.pn_4B := true;
+	end_if;
+	If sum_botle.cv >= 3 then(*Якщо три пляшки пройшло*)
+		PI_IN(TR_S:=true);
+		PI_IN(TR_I:=0.0);
+		sum_botle(r := true);		
+		Step_prog := 1;
+	end_if;
+	end_if;
+	1:
+		sum_botle(r := false);
+	if rozliv.pn_4B then
+		rozliv.pn_5B := true;
+	if fb_pc.pn_water then
+		Step_prog := 2;	
+	end_if;
+	end_if;
+	2:
+		rozliv.kl1 := true;
+		rozliv.kl2 := true;
+		rozliv.kl3 := true;
+	if fb_kl.kl1 and fb_kl.kl2 and fb_kl.kl3 and rozliv.kl1 and rozliv.kl2 and rozliv.kl3 then
+		Step_prog := 3;
+	end_if;
+	3:
+	if rozliv.le_6a then
+		rozliv.kl1 := false;
+	end_if;
+	if rozliv.le_7a then
+		rozliv.kl2 := false;
+	end_if;
+	if rozliv.le_8a then
+		rozliv.kl3 := false;
+	end_if;
+	if rozliv.le_6a and rozliv.le_7a and rozliv.le_8a then
+		Step_prog := 4;
+	end_if;
+	4:
+	rozliv.pn_5B := false;
+	if not fb_pc.pn_water then
+		rozliv.pn_4B := false;
+		Step_prog := 5;
+	end_if;
+	5: 
+	if not fb_pc.pn_konv then
+		PI_IN(TR_S:=false);
+		Step_prog := 0;
+	end_if;
+	end_case;
+	end_if;
 
 Для регулювання рівня в машині розливу написана підпрограма level\_control яка написана на мові ST. Підпрограму зображено на рисунку 5.3.
 
