@@ -458,7 +458,7 @@
 if not pusk then
 
 	PI_IN(TR_S:=true);
-    
+
 end_if;	
 
 if alarm_kl then (*Дії основної програми у випадку будь-якої аварії*)
@@ -469,11 +469,11 @@ if alarm_kl then (*Дії основної програми у випадку б
 		bunk_wt.kl_2g := 0.0;
 		PI_IN(TR_I:=0.0);
 		PI_IN(TR_S:=true);
-
+        
 END_IF;
 
 	if not alarm_kl then
-    
+
 	case Step_prog of (*Початок основної програми*)
 	0:
 	if PUSK and not STOP then
@@ -596,5 +596,88 @@ END_IF;
 
 Рис.5.12 – Імітація витратоміра
 # Розробка людино-машинного інтерфейсу оператора технолога
+
+Мнемосхема процесу розливу в ПЕТ пляшки розроблена в SCADA-програмі Citect SCADA 201. Опис змінних для SCADA-програми наведено в таблиці 6.1.
+
+Таблиця 6.1. Опиc змінних для SCADA-програми.
+
+|Ім’я тегу|Адреси|Тип даних|Мін. Вхідне значення|Макс. Вхідне значення|Мін. Значення в одиницях виміру|Макс. Значення в одиницях виміру|
+| - | - | - | - | - | - | - |
+|PUSK|%M100|DIGITAL|0|1|0|1|
+|STOP|%M101|DIGITAL|0|1|0|1|
+|kl1\_not\_opn|%MW150.0|DIGITAL|0|1|0|1|
+|kl1\_not\_cls|%MW151.0|DIGITAL|0|1|0|1|
+|kl2\_not\_opn|%MW107.0|DIGITAL|0|1|0|1|
+|kl2\_not\_cls|%MW108.0|DIGITAL|0|1|0|1|
+|kl3\_not\_opn|%MW109.0|DIGITAL|0|1|0|1|
+|kl3\_not\_cls|%MW110.0|DIGITAL|0|1|0|1|
+|kl4\_not\_opn|%MW154.0|DIGITAL|0|1|0|1|
+|kl4\_not\_cls|%MW155.0|DIGITAL|0|1|0|1|
+|pn4B\_not\_opn|%MW111.0|DIGITAL|0|1|0|1|
+|pn4B\_not\_cls|%MW112.0|DIGITAL|0|1|0|1|
+|pn5B\_not\_cls|%MW113.0|DIGITAL|0|1|0|1|
+|pn5B\_not\_opn|%MW114.0|DIGITAL|0|1|0|1|
+|le\_2a|%MW100|REAL|||||
+|kl\_2g|%MW102|REAL|||||
+|kl\_2\_fb|%MW104.0|DIGITAL|0|1|0|1|
+|fe\_1a|%MW105|REAL|||||
+|fb\_kl1|%MW115.0|DIGITAL|0|1|0|1|
+|fb\_kl2|%MW116.0|DIGITAL|0|1|0|1|
+|fb\_kl3|%MW117.0|DIGITAL|0|1|0|1|
+|fb\_pn\_konw|%MW118.0|DIGITAL|0|1|0|1|
+|fb\_pn\_wt|%mw119.0|DIGITAL|0|1|0|1|
+|ge\_4a|%MW120.0|DIGITAL|0|1|0|1|
+|ge\_12a|%mw121.0|DIGITAL|0|1|0|1|
+|se\_3a|%MW122|INT|0|5000|0|5000|
+|motor\_out|%mw123|REAL|0\.0|10000\.0|0\.0|1000\.0|
+|speed|%MW125|INT|0|1000|0|1000|
+|man\_avto\_m1|%m103|DIGITAL|0|1|0|1|
+|man\_avto\_kl2|%m102|DIGITAL|0|1|0|1|
+|kl1\_man\_avto|%MW126.0|DIGITAL|0|1|0|1|
+|kl1\_action|%MW127.0|DIGITAL|0|1|0|1|
+|kl2\_man\_avto|%MW128.0|DIGITAL|0|1|0|1|
+|kl2\_action|%MW129.0|DIGITAL|0|1|0|1|
+|kl3\_man\_avto|%MW130.0|DIGITAL|0|1|0|1|
+|kl3\_action|%MW131.0|DIGITAL|0|1|0|1|
+|kl4\_man\_avto|%MW132.0|DIGITAL|0|1|0|1|
+|kl4\_action|%MW133|REAL|0\.0|100\.0|0\.0|100\.0|
+|pn\_konv\_avto|%MW136.0|DIGITAL|0|1|0|1|
+|pn\_konv\_action|%MW137.0|DIGITAL|0|1|0|1|
+|pn\_wt\_avto|%MW138.0|DIGITAL|0|1|0|1|
+|pn\_wt\_action|%MW139.0|DIGITAL|0|1|0|1|
+|kl1|%MW140.0|DIGITAL|0|1|0|1|
+|kl2|%MW141.0|DIGITAL|0|1|0|1|
+|kl3|%MW142.0|DIGITAL|0|1|0|1|
+|le\_6a|%MW143.0|DIGITAL|0|1|0|1|
+|le\_7a|%MW144.0|DIGITAL|0|1|0|1|
+|le\_8a|%MW145.0|DIGITAL|0|1|0|1|
+|pn\_4b|%MW146.0|DIGITAL|0|1|0|1|
+|pn\_5b|%MW147.0|DIGITAL|0|1|0|1|
+|ust\_speed|%MW148|REAL|0\.0|1000\.0|0\.0|1000\.0|
+|skip\_avar|%M105|DIGITAL|0|1|0|1|
+
+
+
+**6.2. Відеокадри дисплейних мнемосхем оператора**
+
+Мнемосхема технологічного процесу призначена для моніторингу процесу з АРМ оператора, а також для внесення ручних дій при виникненні аварійних ситуацій.
+
+Головне вікно мнемосхеми оператора зображене на рисунку 6.1.
+
+![Image alt](https://github.com/danya-andrienko/Qualification-work-NUFT-/blob/main/image/Aspose.Words.149ef003-b193-44de-9c82-be3863438113.002.png)
+
+Рис.6.1 – Головне вікно мнемосхеми технологічного процесу
+
+Також для ручного заданні управляючої дії клапанів розроблене окреме вікно, яке зображене на рисунку 6.2.
+
+![Image alt](https://github.com/danya-andrienko/Qualification-work-NUFT-/blob/main/image/Aspose.Words.149ef003-b193-44de-9c82-be3863438113.003.png)
+
+Рис.6.2 – Сторінка ручного управління
+
+Усі тривоги відображаються на окремій сторінці а також у верхній частині екрану, як зображено на рисунку 6.3.
+
+![Image alt](https://github.com/danya-andrienko/Qualification-work-NUFT-/blob/main/image/Aspose.Words.149ef003-b193-44de-9c82-be3863438113.004.png)
+
+Рис.6.3 – Сторінка тривог та подій
 # Комп’ютерне моделювання системи автоматичного регулювання
 
