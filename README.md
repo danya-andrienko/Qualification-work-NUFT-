@@ -381,6 +381,281 @@
 
 
 # Опис спеціального програмного забезпечення для промислового логічного контролера (алгоритм та програма для ПЛК)
+Процес розливу у ПЕТ пляшку відбувається за наступним алгоритмом:
+
+![Image alt](https://github.com/danya-andrienko/Qualification-work-NUFT-/blob/main/Aspose.Words.a6b34af0-7045-4ec0-bba0-31c075f84457.002.png)
+
+Змінні програми представлені в таблиці 5.1
+
+
+
+
+
+
+` `Таблиця 5.1 – змінні програми користувача
+
+|Ім’я змінної|Адреса|Найменування|
+| - | - | - |
+|bunk\_wt.kl\_2g|%QW0.2.5|Клапан набору рідини в апарат|
+|bunk\_wt.Le\_2a|%IW0.2.1|Рівнемір ємності|
+|rozliv.kl1|%Q0.4.0|Клапан розливу 1|
+|rozliv.kl2|%Q0.4.1|Клапан розливу 2|
+|rozliv.kl3|%Q0.4.2|Клапан розливу 3|
+|rozliv.le\_6a|%i0.3.0|Сигналізатор рівня в пляшці 1|
+|rozliv.le\_7a|%i0.3.1|Сигналізатор рівня в пляшці 2|
+|rozliv.le\_8a|%i0.3.2|Сигналізатор рівня в пляшці 3|
+|rozliv.pn\_4B|%q0.4.3|Пневмоциліндр на конвеєрі|
+|rozliv.pn\_5B|%q0.4.4|Пневмоциліндр, що опускає трубки в пляшки|
+|fb\_kl.kl1|%i0.3.5|Датчик протоку 1|
+|fb\_kl.kl2|%i0.3.6|Датчик протоку 2|
+|fb\_kl.kl3|%i0.3.7|Датчик протоку 3|
+|fb\_pc.pn\_konv|%i0.3.9|Датчик зворотнього зв’язку пневмоциліндра 4В|
+|fb\_pc.pn\_water|%i0.3.4|Датчик зворотнього зв’язку пневмоциліндра 5В|
+|in\_out.GE\_4a|%i0.3.3|Датчик наявності пляшки на вході в апарат|
+|in\_out.GE\_12a|%i0.3.8|Датчик наявності пляшки на виході|
+|konv\_in.Motor|%QW0.2.4|Сигнал на частотний перетворювач|
+|konv\_in.SE\_3a|%ID0.1.0.12|Кількість імпульсів енкодера|
+|bunk\_wt.FE\_1a|%IW0.2.0|Витратомір|
+
+Програма користувача складається з декількох підпрограм для кращої орієнтації та розподілення задач.
+
+Окрім підпрограм також розроблений власний функціональний блок для зчитування помилок з клапанів.
+
+Програма користувача складається з наступних підпрограм:
+
+- conect;
+- obert;
+- Process;
+- level\_control;
+- alarms;
+- Fe\_all;
+- reg\_kl.   
+
+Підпрограма conect написана на мові ST і призначена для прив’язки каналів вводу-виводу до створених структур. Лістинг програми показано на рисунку 5.1.
+
+![Image alt](https://github.com/danya-andrienko/Qualification-work-NUFT-/blob/main/Aspose.Words.a6b34af0-7045-4ec0-bba0-31c075f84457.003.png)  
+
+Рис.5.1 – Підпрограма cоnect
+
+
+
+Підпрограма obert написана на мові ST і призначена для регулювання значення швидкості конвеєра. Лістинг програми показано на рисунку 5.2.
+
+![Image alt](https://github.com/danya-andrienko/Qualification-work-NUFT-/blob/main/Aspose.Words.a6b34af0-7045-4ec0-bba0-31c075f84457.004.png)
+
+Рис.5.2 – Підпрограма obert
+
+Підпрограма Process написана на мові ST і вона є основною програмою де іде виконання процесу. Лістинг основної програми:
+
+(\*умова початку роботи програми\*)
+
+`	`PI\_IN ( PV := INT\_TO\_REAL (IN := konv\_in.SE\_3a), SP := Speed\_kn, MAN\_AUTO := man\_auto,
+
+`        `PARA := Para\_kn, OUT := konv\_in.Motor);(\*параметри регулятора\*)
+
+`	`sum\_botle(cu := in\_out.GE\_4a);	(\*Прив'язка датчика наявності пляшки до лічильна\*)
+
+if not pusk then
+
+`	`PI\_IN(TR\_S:=true);
+
+end\_if;	
+
+if alarm\_kl then(\*Дії основної програми у випадку будь-якої аварії\*)
+
+`		`rozliv.kl1 := false;
+
+`		`rozliv.kl2 := false;
+
+`		`rozliv.kl3 := false;
+
+`		`bunk\_wt.kl\_2g := 0.0;
+
+`		`PI\_IN(TR\_I:=0.0);
+
+`		`PI\_IN(TR\_S:=true);
+
+END\_IF;
+
+`	`if not alarm\_kl then
+
+`	`case Step\_prog of (\*Початок основної програми\*)
+
+`	`0:
+
+`	`if PUSK and not STOP then
+
+`		`PI\_IN(TR\_S:=false);(\*Вимкнення трекінгу\*)
+
+`	`if sum\_botle.cv = 1 then(\*Якщо пройшла пляшка відкрити цилінтр на конвеєрі\*)
+
+`		`rozliv.pn\_4B := true;
+
+`	`end\_if;
+
+`	`If sum\_botle.cv >= 3 then(\*Якщо три пляшки пройшло\*)
+
+`		`PI\_IN(TR\_S:=true);
+
+`		`PI\_IN(TR\_I:=0.0);
+
+`		`sum\_botle(r := true);		
+
+`		`Step\_prog := 1;
+
+
+
+`	`end\_if;
+
+`	`end\_if;
+
+`	`1:
+
+`		`sum\_botle(r := false);
+
+`	`if rozliv.pn\_4B then
+
+`		`rozliv.pn\_5B := true;
+
+`	`if fb\_pc.pn\_water then
+
+`		`Step\_prog := 2;	
+
+`	`end\_if;
+
+`	`end\_if;
+
+`	`2:
+
+`		`rozliv.kl1 := true;
+
+`		`rozliv.kl2 := true;
+
+`		`rozliv.kl3 := true;
+
+`	`if fb\_kl.kl1 and fb\_kl.kl2 and fb\_kl.kl3 and rozliv.kl1 and rozliv.kl2 and rozliv.kl3 then
+
+`		`Step\_prog := 3;
+
+`	`end\_if;
+
+`	`3:
+
+`	`if rozliv.le\_6a then
+
+`		`rozliv.kl1 := false;
+
+`	`end\_if;
+
+`	`if rozliv.le\_7a then
+
+`		`rozliv.kl2 := false;
+
+`	`end\_if;
+
+`	`if rozliv.le\_8a then
+
+`		`rozliv.kl3 := false;
+
+`	`end\_if;
+
+`	`if rozliv.le\_6a and rozliv.le\_7a and rozliv.le\_8a then
+
+`		`Step\_prog := 4;
+
+`	`end\_if;
+
+`	`4:
+
+`	`rozliv.pn\_5B := false;
+
+`	`if not fb\_pc.pn\_water then
+
+`		`rozliv.pn\_4B := false;
+
+`		`Step\_prog := 5;
+
+`	`end\_if;
+
+`	`5: 
+
+`	`if not fb\_pc.pn\_konv then
+
+`		`PI\_IN(TR\_S:=false);
+
+`		`Step\_prog := 0;
+
+`	`end\_if;
+
+`	`end\_case;
+
+`	`end\_if;
+
+Для регулювання рівня в машині розливу написана підпрограма level\_control яка написана на мові ST. Підпрограму зображено на рисунку 5.3.
+
+![Image alt](https://github.com/danya-andrienko/Qualification-work-NUFT-/blob/main/Aspose.Words.a6b34af0-7045-4ec0-bba0-31c075f84457.005.png)
+
+Рис.5.3 – Підпрограма level\_control
+
+Підпрограма alarms написана на мові FBD, призначена для моніторингу виникнення аварійних ситуацій. Підпрограму зображено на рисунку 5.4.
+
+![Image alt](https://github.com/danya-andrienko/Qualification-work-NUFT-/blob/main/Aspose.Words.a6b34af0-7045-4ec0-bba0-31c075f84457.006.png)
+
+Рис.5.4 – Підпрограма alarms
+
+Для реалізації даної підпрограми був розроблений функціональний блок який зображено на рисунку 5.5.
+
+![Image alt](https://github.com/danya-andrienko/Qualification-work-NUFT-/blob/main/Aspose.Words.a6b34af0-7045-4ec0-bba0-31c075f84457.007.png)
+
+Рис.5.5 – Функціональний блок kl\_alarm
+
+Підпрограма reg\_kl написана на мові FBD і призначена для ручного управління всіма клапанами системи. Підпрограма зображена на рисунку 5.6.
+
+![Image alt](https://github.com/danya-andrienko/Qualification-work-NUFT-/blob/main/Aspose.Words.a6b34af0-7045-4ec0-bba0-31c075f84457.008.png)
+
+Рис.5.6 – Підпрограма reg\_kl
+
+Для перевірки роботи програми перед впровадженням програми на об’єкті було створено програму імітатор об’єкта. Також для імітації було створено функціональний блок для імітації рівня рис.5.7.
+
+![Image alt](https://github.com/danya-andrienko/Qualification-work-NUFT-/blob/main/Aspose.Words.a6b34af0-7045-4ec0-bba0-31c075f84457.009.png)
+
+Рис.5.7 – Функціональний блок імітації рівня
+
+Реалізацію імітації рівня показано на рисунку 5.8.
+
+![Image alt](https://github.com/danya-andrienko/Qualification-work-NUFT-/blob/main/Aspose.Words.a6b34af0-7045-4ec0-bba0-31c075f84457.010.png)
+
+Рис.5.8 – Імітація рівня
+
+Імітація датчиків кінцевого положення показано на рисунку 5.9.
+
+![Image alt](https://github.com/danya-andrienko/Qualification-work-NUFT-/blob/main/Aspose.Words.a6b34af0-7045-4ec0-bba0-31c075f84457.011.png)
+
+Рис.5.9 – Імітація датчиків кінцевого положення
+
+Реалізацію імітації сигналу з енкодера показано на рисунку 5.10.
+
+![Image alt](https://github.com/danya-andrienko/Qualification-work-NUFT-/blob/main/Aspose.Words.a6b34af0-7045-4ec0-bba0-31c075f84457.012.png)
+
+Рис.5.10 – Імітація сигналу з енкодера
+
+Імітацію наповнення пляшок показано на рисунку 5.11.
+
+![Image alt](https://github.com/danya-andrienko/Qualification-work-NUFT-/blob/main/Aspose.Words.a6b34af0-7045-4ec0-bba0-31c075f84457.013.png)
+
+Рис. 5.11 – Імітація наповнення пляшок
+
+Імітація датчиків 4а та 12а на конвеєрі показано на рисунку 5.12.
+
+![Image alt](https://github.com/danya-andrienko/Qualification-work-NUFT-/blob/main/Aspose.Words.a6b34af0-7045-4ec0-bba0-31c075f84457.014.png)
+
+Рис.5.12 – Імітація датчиків 4а та 12а
+
+Імітацію витратоміра показано на рисунку 5.13.
+
+![Image alt](https://github.com/danya-andrienko/Qualification-work-NUFT-/blob/main/Aspose.Words.a6b34af0-7045-4ec0-bba0-31c075f84457.015.png)
+
+Рис.5.12 – Імітація витратоміра
 # Розробка людино-машинного інтерфейсу оператора технолога
 # Комп’ютерне моделювання системи автоматичного регулювання
 
